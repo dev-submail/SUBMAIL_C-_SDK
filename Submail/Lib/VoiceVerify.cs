@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Submail.Lib
 {
-    public class VoiceSend : SendBase
+    public class VoiceVerify : SendBase
     {
         public const string TO = "to";
         public const string CODE = "code";
 
-        public VoiceSend(IAppConfig appConfig) : base(appConfig)
+        public VoiceVerify(IAppConfig appConfig) : base(appConfig)
         {
         }
 
@@ -21,7 +21,7 @@ namespace Submail.Lib
             this._dataPair.Add(TO, address);
         }
 
-        public void AddCode(string code)
+        public void SetCode(string code)
         {
             this._dataPair.Add(CODE, code);
         }
@@ -31,7 +31,7 @@ namespace Submail.Lib
             return new Message(_appConfig);
         }
 
-        public bool VoiceVerify (out string returnMessage)
+        public bool Verify (out string returnMessage)
         {
             return this.GetSender().VoiceVerify(_dataPair, out returnMessage);
         }

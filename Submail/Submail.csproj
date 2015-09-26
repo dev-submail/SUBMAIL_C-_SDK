@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfig\VoiceAppConfig.cs" />
     <Compile Include="Lib\AddressBookMail.cs" />
     <Compile Include="Lib\AddressBookMessage.cs" />
     <Compile Include="Lib\ISender.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="Lib\MessageMultiXSend.cs" />
     <Compile Include="Lib\MessageXSend.cs" />
     <Compile Include="Lib\SendBase.cs" />
-    <Compile Include="Lib\VoiceSend.cs" />
+    <Compile Include="Lib\VoiceVerify.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\HttpWebHelper.cs" />
     <Compile Include="Utility\RequestHelper.cs" />

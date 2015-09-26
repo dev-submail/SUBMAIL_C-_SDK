@@ -13,12 +13,12 @@ namespace SubMailTest
         public void VoiceVerify()
         {
             IAppConfig appConfig = new VoiceAppConfig("20139", "aeefd6d1170a354aa9282a04138c59ee");
-            VoiceSend voiceSend = new VoiceSend(appConfig);
-            voiceSend.AddTo("13756563150");
+            VoiceVerify voiceVerify = new VoiceVerify(appConfig);
+            voiceVerify.AddTo("13756563150");
             // 此数字为语音播报的4位数字验证码
-            voiceSend.AddCode("1234");
+            voiceVerify.SetCode("1234");
             string returnMessage = string.Empty;
-            if (voiceSend.VoiceVerify(out returnMessage) == false)
+            if (voiceVerify.Verify(out returnMessage) == false)
             {
                 Console.WriteLine(returnMessage);
             }
