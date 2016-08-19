@@ -24,6 +24,7 @@ namespace Submail.Lib
         private const string LINKS = "links";
         private const string ATTACHMENTS = "attachments";
         private const string HEADERS = "headers";
+        private const string TAG = "tag";
 
         public MailSend(IAppConfig appConfig) : base(appConfig)
         {
@@ -43,7 +44,10 @@ namespace Submail.Lib
         {
             AddWithComma(ADDRESSBOOK, addAddressBook);
         }
-
+        public void SetTag(string tag)
+        {
+            this._dataPair.Add(TAG, tag);
+        }
         public void SetSender(string sender, string name)
         {
             this._dataPair.Add(FROM, sender);

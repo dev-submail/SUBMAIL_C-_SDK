@@ -13,11 +13,9 @@ namespace SubMailTest
     {
         static void Main(string[] args)
         {
-            var jsonreturn = "{\"status\":\"success\",\"return \":[{\"send_id\":\"ner5g3\",\"to\":\"guoqiang @custouch.com\"}]}";
 
-            Console.WriteLine(HttpWebHelper.CheckReturnJsonStatus(jsonreturn));
-            //MailSendDemo mailSendDemo = new MailSendDemo();
-            //mailSendDemo.SendMail();
+            MailSendDemo mailSendDemo = new MailSendDemo();
+            mailSendDemo.SendMail();
 
             // MessageSendXDemo messageSendXDemo = new MessageSendXDemo();
             // messageSendXDemo.SendMessage();
