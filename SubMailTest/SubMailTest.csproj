@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Submail\Submail.csproj" />
+    <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <ProjectReference Include="..\Submail\Submail.csproj" />
   </ItemGroup>
 
 </Project>
