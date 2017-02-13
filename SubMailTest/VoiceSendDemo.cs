@@ -14,7 +14,7 @@ namespace SubMailTest
         {
             IAppConfig appConfig = new VoiceAppConfig("20139", "aeefd6d1170a354aa9282a04138c59ee");
             VoiceVerify voiceVerify = new VoiceVerify(appConfig);
-            voiceVerify.AddTo("13756563150");
+            voiceVerify.AddTo("phoneNumberHere");
             // 此数字为语音播报的4位数字验证码
             voiceVerify.SetCode("1234");
             string returnMessage = string.Empty;

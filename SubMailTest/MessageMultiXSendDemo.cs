@@ -19,7 +19,7 @@ namespace SubMailTest
             Dictionary<string, string> vars = new Dictionary<string, string>();
             vars.Add("code", "a你好aaaa");
             messageMultiSend.SetMulti(new List<MultiMessageItem>() {
-                new MultiMessageItem() { to="13756563150"},
+                new MultiMessageItem() { to="phoneNumberHere"},
                 new MultiMessageItem() { to="13240372516", vars = vars}
             });
 

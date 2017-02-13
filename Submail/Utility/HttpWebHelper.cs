@@ -54,6 +54,10 @@ namespace Submail.Utility
 
         public static bool CheckMultiReturnJsonStatus(string returnJsonResult)
         {
+            if (CheckReturnJsonStatus(returnJsonResult) == false)
+            {
+                return false;
+            }
             JArray jarray = JArray.Parse(returnJsonResult);
 
             return jarray.Children().All(item => CheckReturnJsonStatus(item.ToString()));
