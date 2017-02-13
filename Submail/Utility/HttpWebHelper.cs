@@ -4,6 +4,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Submail.AppConfig;
 using System.IO;
+using System.Linq;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 
@@ -30,10 +31,10 @@ namespace Submail.Utility
                 using (HttpResponseMessage response = httpClient.GetAsync(API_TIMESTAMP).Result)
                 {
                     string jsonResult = response.Content.ReadAsStringAsync().Result;
-                    Dictionary<string, string> jsonMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResult);
+                    var jsonMap = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonResult);
                     if (jsonMap.ContainsKey(TIMESTAMP))
                     {
-                        return jsonMap[TIMESTAMP];
+                        return jsonMap[TIMESTAMP].ToString();
                     }
                 }
             }
@@ -43,29 +44,19 @@ namespace Submail.Utility
 
         public static bool CheckReturnJsonStatus(string retrunJsonResult)
         {
-            Dictionary<string, string> jsonMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(retrunJsonResult);
+            var jsonMap = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(retrunJsonResult);
             if (jsonMap.ContainsKey("status") && jsonMap["status"].Equals("success", StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
-
             return false;
         }
 
         public static bool CheckMultiReturnJsonStatus(string returnJsonResult)
         {
             JArray jarray = JArray.Parse(returnJsonResult);
-            bool isAllSuccess = true;
-            foreach (var item in jarray.Children())
-            {
-                if (CheckReturnJsonStatus(item.ToString()) == false)
-                {
-                    isAllSuccess = false;
-                    break;
-                }
-            }
 
-            return isAllSuccess;
+            return jarray.Children().All(item => CheckReturnJsonStatus(item.ToString()));
         }
 
         public string HttpPost(string httpUrl, Dictionary<string, object> dataPair)

@@ -1,19 +1,11 @@
-﻿using Submail;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SubMailTest
+﻿namespace SubMailTest
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // MailSendDemo mailSendDemo = new MailSendDemo();
-            // mailSendDemo.SendMail();
+            MailSendDemo mailSendDemo = new MailSendDemo();
+            mailSendDemo.SendMail();
 
             // MessageSendXDemo messageSendXDemo = new MessageSendXDemo();
             // messageSendXDemo.SendMessage();
@@ -21,8 +13,8 @@ namespace SubMailTest
             // MessageMultiXSendDemo messageMultiXSendDemo = new MessageMultiXSendDemo();
             // messageMultiXSendDemo.SendMultiMessage();
 
-            VoiceSendDemo voiceSendDemo = new VoiceSendDemo();
-            voiceSendDemo.VoiceVerify();
+            //VoiceSendDemo voiceSendDemo = new VoiceSendDemo();
+            //voiceSendDemo.VoiceVerify();
         }
     }
 }
