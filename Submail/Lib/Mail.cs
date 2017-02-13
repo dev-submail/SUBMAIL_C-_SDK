@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Submail.AppConfig;
+﻿using Submail.AppConfig;
 using Submail.Utility;
 using System;
 using System.Collections.Generic;

@@ -1,10 +1,6 @@
 ﻿using Submail.AppConfig;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Submail.Utility
 {
@@ -44,14 +40,14 @@ namespace Submail.Utility
 
         private string GetMD5Signature(string data)
         {
-            string signStr = string.Format("{0}{1}{2}{3}{4}", _appConfig.AppId, _appConfig.AppKey, data, _appConfig.AppId, _appConfig.AppKey);
-            MD5 md5 = new MD5CryptoServiceProvider();
+            string signStr = $"{_appConfig.AppId}{_appConfig.AppKey}{data}{_appConfig.AppId}{_appConfig.AppKey}";
+            MD5 md5 = MD5.Create();
             byte[] fromData = Encoding.GetEncoding("utf-8").GetBytes(signStr);
             byte[] targetData = md5.ComputeHash(fromData);
             StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0; i < targetData.Length; i++)
+            foreach (byte b in targetData)
             {
-                sBuilder.Append(targetData[i].ToString("x2"));
+                sBuilder.Append(b.ToString("x2"));
             }
 
             return sBuilder.ToString();
@@ -59,14 +55,14 @@ namespace Submail.Utility
 
         private string GetSHA1Signature(string data)
         {
-            string signStr = string.Format("{0}{1}{2}{3}{4}", _appConfig.AppId, _appConfig.AppKey, data, _appConfig.AppId, _appConfig.AppKey);
-            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            string signStr = $"{_appConfig.AppId}{_appConfig.AppKey}{data}{_appConfig.AppId}{_appConfig.AppKey}";
+            SHA1 sha1 = SHA1.Create();
             byte[] fromData = Encoding.GetEncoding("utf-8").GetBytes(signStr);
             byte[] targetData = sha1.ComputeHash(fromData);
             StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0; i < targetData.Length; i++)
+            foreach (byte b in targetData)
             {
-                sBuilder.Append(targetData[i].ToString("x2"));
+                sBuilder.Append(b.ToString("x2"));
             }
 
             return sBuilder.ToString();
