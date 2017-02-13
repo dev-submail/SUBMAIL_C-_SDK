@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Submail.AppConfig
+﻿namespace Submail.AppConfig
 {
     public class MessageConfig : IAppConfig
     {
         public MessageConfig(string appId, string appKey, SignType signType = SignType.normal)
         {
-            this._appId = appId;
-            this._appKey = appKey;
-            this._signType = signType;
+            _appId = appId;
+            _appKey = appKey;
+            _signType = signType;
         }
 
         private string _appId;

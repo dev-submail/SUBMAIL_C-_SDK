@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
-using System.Diagnostics;
 using Submail.AppConfig;
 using System.IO;
 using System.Net.Http.Headers;
@@ -24,7 +20,7 @@ namespace Submail.Utility
         private IAppConfig _appConfig;
         public HttpWebHelper(IAppConfig appConfig)
         {
-            this._appConfig = appConfig;
+            _appConfig = appConfig;
         }
 
         public string GetTimeStamp()
@@ -90,7 +86,7 @@ namespace Submail.Utility
         private MultipartFormDataContent Build(Dictionary<string, object> dataPair)
         {
             MultipartFormDataContent multipart = new MultipartFormDataContent();
-            string timeStamp = this.GetTimeStamp();
+            string timeStamp = GetTimeStamp();
             dataPair.Add(APPID, _appConfig.AppId);
             dataPair.Add(TIMESTAMP, timeStamp);
             dataPair.Add(SIGN_TYPE, _appConfig.SignType.ToString());
@@ -111,8 +107,8 @@ namespace Submail.Utility
                 FileInfo file = dataPair[key] as FileInfo;
                 if (file != null)
                 {
-                    var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(file.FullName));
-                    fileContent.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("multipart/form-data");
+                    var fileContent = new ByteArrayContent(File.ReadAllBytes(file.FullName));
+                    fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
                     fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                     { 
                         FileName = file.Name,

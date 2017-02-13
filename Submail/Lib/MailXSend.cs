@@ -1,9 +1,4 @@
 ﻿using Submail.AppConfig;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Submail.Lib
 {
@@ -33,63 +28,63 @@ namespace Submail.Lib
 
         public void AddTo(string address, string name)
         {
-            this.AddWithBracket(TO, name, address);
+            AddWithBracket(TO, name, address);
         }
 
         public void AddAddressBook(string addressbook)
         {
-            this.AddWithComma(ADDRESSBOOK, addressbook);
+            AddWithComma(ADDRESSBOOK, addressbook);
         }
 
         public void SetSender(string sender, string name)
         {
-            this._dataPair.Add(FROM, sender);
-            this._dataPair.Add(FROM_NAME, name);
+            _dataPair.Add(FROM, sender);
+            _dataPair.Add(FROM_NAME, name);
         }
 
         public void SetReply(string reply)
         {
-            this._dataPair.Add(REPLY, reply);
+            _dataPair.Add(REPLY, reply);
         }
 
         public void AddCc(string address, string name)
         {
-            this.AddWithBracket(CC, name, address);
+            AddWithBracket(CC, name, address);
         }
 
         public void AddBcc(string address, string name)
         {
-            this.AddWithBracket(BCC, name, address);
+            AddWithBracket(BCC, name, address);
         }
 
         public void SetSubject(string subject)
         {
-            this._dataPair.Add(SUBJECT, subject);
+            _dataPair.Add(SUBJECT, subject);
         }
 
         public void SetProject(string project)
         {
-            this._dataPair.Add(PROJECT, project);
+            _dataPair.Add(PROJECT, project);
         }
 
         public void AddVar(string key, string val)
         {
-            this.AddWithJson(VARS, key, val);
+            AddWithJson(VARS, key, val);
         }
 
         public void AddLink(string key, string val)
         {
-            this.AddWithJson(LINKS, key, val);
+            AddWithJson(LINKS, key, val);
         }
 
         public void AddHeaders(string key, string val)
         {
-            this.AddWithJson(HEADERS, key, val);
+            AddWithJson(HEADERS, key, val);
         }
 
         public bool XSend(out string returnMessage)
         {
-            return this.GetSender().XSend(_dataPair, out returnMessage);
+            return GetSender().XSend(_dataPair, out returnMessage);
         }
     }
 }

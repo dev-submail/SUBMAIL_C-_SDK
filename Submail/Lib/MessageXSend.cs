@@ -1,9 +1,4 @@
 ﻿using Submail.AppConfig;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Submail.Lib
 {
@@ -26,27 +21,27 @@ namespace Submail.Lib
 
         public void AddTo(string address)
         {
-            this.AddWithComma(TO, address);
+            AddWithComma(TO, address);
         }
 
         public void AddAddressBook(string addressbook)
         {
-            this.AddWithComma(ADDRESSBOOK, addressbook);
+            AddWithComma(ADDRESSBOOK, addressbook);
         }
 
         public void SetProject(string project)
         {
-            this._dataPair.Add(PROJECT, project);
+            _dataPair.Add(PROJECT, project);
         }
 
         public void AddVar(string key, string val)
         {
-            this.AddWithJson(VARS, key, val);
+            AddWithJson(VARS, key, val);
         }
 
         public bool XSend(out string returnMessage)
         {
-           return this.GetSender().XSend(_dataPair, out returnMessage);
+           return GetSender().XSend(_dataPair, out returnMessage);
         }
     }
 }

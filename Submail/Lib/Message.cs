@@ -1,9 +1,6 @@
 ﻿using Submail.AppConfig;
 using Submail.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Submail.Lib
 {
@@ -21,8 +18,8 @@ namespace Submail.Lib
 
         public Message(IAppConfig appConfig)
         {
-            this._appConfig = appConfig;
-            this._httpWebHelper = new HttpWebHelper(_appConfig);
+            _appConfig = appConfig;
+            _httpWebHelper = new HttpWebHelper(_appConfig);
         }
 
         public bool Send(Dictionary<string, object> data, out string returnMessage)

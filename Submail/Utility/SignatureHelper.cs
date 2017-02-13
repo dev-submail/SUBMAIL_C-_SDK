@@ -9,13 +9,13 @@ namespace Submail.Utility
         private IAppConfig _appConfig;
         public SignatureHelper(IAppConfig appConfig)
         {
-            this._appConfig = appConfig;
+            _appConfig = appConfig;
         }
 
         /// <summary>
         /// Get signature based on sign type
         /// </summary>
-        /// <param name="data">eg : key1=value1&key2=value2</param>
+        /// <param name="data">eg : key1=value1&amp;key2=value2</param>
         /// <returns></returns>
         public string GetSignature(string data)
         {
