@@ -2,9 +2,6 @@
 using Submail.AppConfig;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Submail.Lib
 {
@@ -104,9 +101,9 @@ namespace Submail.Lib
             }
 
             Dictionary<string, string> jsonMap = null;
-            if (this._dataPair.ContainsKey(key))
+            if (_dataPair.ContainsKey(key))
             {
-                jsonMap = JsonConvert.DeserializeObject<Dictionary<string, string>>((string)this._dataPair[key]);
+                jsonMap = JsonConvert.DeserializeObject<Dictionary<string, string>>((string)_dataPair[key]);
             }
             else
             {
@@ -116,7 +113,7 @@ namespace Submail.Lib
             if (jsonMap != null)
             {
                 jsonMap.Add(jKey, jValue);
-                this._dataPair[key] = JsonConvert.SerializeObject(jsonMap);
+                _dataPair[key] = JsonConvert.SerializeObject(jsonMap);
             }
         }
     }

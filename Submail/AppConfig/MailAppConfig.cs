@@ -1,57 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Submail.AppConfig
+﻿namespace Submail.AppConfig
 {
     public class MailAppConfig : IAppConfig
     {
         public MailAppConfig(string appId, string appKey, SignType signType = SignType.normal)
         {
-            this._appId = appId;
-            this._appKey = appKey;
-            this._signType = signType;
+            AppId = appId;
+            AppKey = appKey;
+            SignType = signType;
         }
 
-        private string _appId;
-        public string AppId
-        {
-            get
-            {
-                return _appId;
-            }
-            set
-            {
-                _appId = value;
-            }
-        }
+        public string AppId { get; set; }
 
-        private string _appKey;
-        public string AppKey
-        {
-            get
-            {
-                return _appKey;
-            }
-            set
-            {
-                _appKey = value;
-            }
-        }
+        public string AppKey { get; set; }
 
-        private SignType _signType;
-        public SignType SignType
-        {
-            get
-            {
-                return _signType;
-            }
-            set
-            {
-                _signType = value;
-            }
-        }
+        public SignType SignType { get; set; }
     }
 }

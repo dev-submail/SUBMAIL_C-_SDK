@@ -1,11 +1,6 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Submail.AppConfig;
-using System;
+﻿using Submail.AppConfig;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Submail.Lib
 {
@@ -25,17 +20,17 @@ namespace Submail.Lib
 
         public void SetProject(string project)
         {
-            this._dataPair.Add(PROJECT, project);
+            _dataPair.Add(PROJECT, project);
         }
 
         public void SetMulti(List<MultiMessageItem> multiItems)
         {
-            this._dataPair.Add(MULTI, JsonConvert.SerializeObject(multiItems));
+            _dataPair.Add(MULTI, JsonConvert.SerializeObject(multiItems));
         }
 
         public bool MultiXSend(out string returnMessage)
         {
-            return this.GetSender().MultiXSend(_dataPair, out returnMessage);
+            return GetSender().MultiXSend(_dataPair, out returnMessage);
         }
     }
 

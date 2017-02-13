@@ -1,10 +1,5 @@
 ﻿using Submail.AppConfig;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Submail.Lib
 {
@@ -46,58 +41,58 @@ namespace Submail.Lib
 
         public void SetSender(string sender, string name)
         {
-            this._dataPair.Add(FROM, sender);
-            this._dataPair.Add(FROM_NAME, name);
+            _dataPair.Add(FROM, sender);
+            _dataPair.Add(FROM_NAME, name);
         }
 
         public void SetReply(string reply)
         {
-            this._dataPair.Add(REPLY, reply);
+            _dataPair.Add(REPLY, reply);
         }
 
         public void AddCc(string address, string name)
         {
-            this.AddWithBracket(CC, name, address);
+            AddWithBracket(CC, name, address);
         }
 
         public void AddBcc(string address, string name)
         {
-            this.AddWithBracket(BCC, name, address);
+            AddWithBracket(BCC, name, address);
         }
 
         public void SetSubject(string subject)
         {
-            this._dataPair.Add(SUBJECT, subject);
+            _dataPair.Add(SUBJECT, subject);
         }
 
         public void SetText(string text)
         {
-            this._dataPair.Add(TEXT, text);
+            _dataPair.Add(TEXT, text);
         }
 
         public void SetHtml(string html)
         {
-            this._dataPair.Add(HTML, html);
+            _dataPair.Add(HTML, html);
         }
 
         public void AddVar(string key, string val)
         {
-            this.AddWithJson(VARS, key, val);
+            AddWithJson(VARS, key, val);
         }
 
         public void AddLink(string key, string val)
         {
-            this.AddWithJson(LINKS, key, val);
+            AddWithJson(LINKS, key, val);
         }
 
         public void AddAttachment(string file)
         {
-            this.AddWithIncrease(ATTACHMENTS, new FileInfo(file));
+            AddWithIncrease(ATTACHMENTS, new FileInfo(file));
         }
 
         public void AddHeaders(string key, string val)
         {
-            this.AddWithJson(HEADERS, key, val);
+            AddWithJson(HEADERS, key, val);
         }
 
         public bool Send(out string returnMessage)

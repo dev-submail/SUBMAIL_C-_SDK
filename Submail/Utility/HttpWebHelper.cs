@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
-using System.Diagnostics;
 using Submail.AppConfig;
 using System.IO;
+using System.Linq;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 
@@ -24,7 +21,7 @@ namespace Submail.Utility
         private IAppConfig _appConfig;
         public HttpWebHelper(IAppConfig appConfig)
         {
-            this._appConfig = appConfig;
+            _appConfig = appConfig;
         }
 
         public string GetTimeStamp()
@@ -34,10 +31,10 @@ namespace Submail.Utility
                 using (HttpResponseMessage response = httpClient.GetAsync(API_TIMESTAMP).Result)
                 {
                     string jsonResult = response.Content.ReadAsStringAsync().Result;
-                    Dictionary<string, string> jsonMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResult);
+                    var jsonMap = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonResult);
                     if (jsonMap.ContainsKey(TIMESTAMP))
                     {
-                        return jsonMap[TIMESTAMP];
+                        return jsonMap[TIMESTAMP].ToString();
                     }
                 }
             }
@@ -47,29 +44,23 @@ namespace Submail.Utility
 
         public static bool CheckReturnJsonStatus(string retrunJsonResult)
         {
-            Dictionary<string, string> jsonMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(retrunJsonResult);
+            var jsonMap = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(retrunJsonResult);
             if (jsonMap.ContainsKey("status") && jsonMap["status"].Equals("success", StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
-
             return false;
         }
 
         public static bool CheckMultiReturnJsonStatus(string returnJsonResult)
         {
-            JArray jarray = JArray.Parse(returnJsonResult);
-            bool isAllSuccess = true;
-            foreach (var item in jarray.Children())
+            if (CheckReturnJsonStatus(returnJsonResult) == false)
             {
-                if (CheckReturnJsonStatus(item.ToString()) == false)
-                {
-                    isAllSuccess = false;
-                    break;
-                }
+                return false;
             }
+            JArray jarray = JArray.Parse(returnJsonResult);
 
-            return isAllSuccess;
+            return jarray.Children().All(item => CheckReturnJsonStatus(item.ToString()));
         }
 
         public string HttpPost(string httpUrl, Dictionary<string, object> dataPair)
@@ -90,7 +81,7 @@ namespace Submail.Utility
         private MultipartFormDataContent Build(Dictionary<string, object> dataPair)
         {
             MultipartFormDataContent multipart = new MultipartFormDataContent();
-            string timeStamp = this.GetTimeStamp();
+            string timeStamp = GetTimeStamp();
             dataPair.Add(APPID, _appConfig.AppId);
             dataPair.Add(TIMESTAMP, timeStamp);
             dataPair.Add(SIGN_TYPE, _appConfig.SignType.ToString());
@@ -111,8 +102,8 @@ namespace Submail.Utility
                 FileInfo file = dataPair[key] as FileInfo;
                 if (file != null)
                 {
-                    var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(file.FullName));
-                    fileContent.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("multipart/form-data");
+                    var fileContent = new ByteArrayContent(File.ReadAllBytes(file.FullName));
+                    fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
                     fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                     { 
                         FileName = file.Name,
